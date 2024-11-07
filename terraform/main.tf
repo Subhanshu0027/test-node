@@ -164,23 +164,15 @@ resource "aws_instance" "web_instance" {
     # Clone the GitHub repository
     git clone ${var.github_repo_url} /home/ubuntu/app
 
-    # Change directory to the cloned repo
+   
     cd /home/ubuntu/app
-
-    # Build Docker image from Dockerfile
     sudo docker build -t ${var.docker_image_name} . 
-
-    # Run Docker container from the built image with dynamic container name and port
     sudo docker run -d -p ${var.docker_port}:${var.docker_port} --name ${var.docker_container_name} ${var.docker_image_name}
-
-    # Configure Nginx (this will use the Elastic IP)
     sudo rm -rf /etc/nginx/sites-available/default
     sudo rm -rf /etc/nginx/sites-enabled/default
     sudo sed -i 's/{instance_ip}/'${aws_eip.web_instance_eip.public_ip}'/g' /home/ubuntu/app/nginx_config.conf
     sudo mv /home/ubuntu/app/nginx_config.conf /etc/nginx/sites-available/nginx_config.conf
     sudo ln -s /etc/nginx/sites-available/nginx_config.conf /etc/nginx/sites-enabled/
-
-    # Restart Nginx to apply the new configuration
     sudo certbot --nginx --non-interactive --agree-tos --email ${var.cert_email} -d ${var.domain_name}
     sudo systemctl restart nginx
   EOF
