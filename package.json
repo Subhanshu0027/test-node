@@ -1,14 +1,12 @@
-// package.json
 {
   "name": "node-app",
   "version": "1.0.0",
-  "description": "A simple Node.js app that prints 'Hello Buddy'",
+  "description": "My Dockerized Node.js app",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.17.1"
   }
 }
-
