@@ -160,14 +160,6 @@ resource "aws_instance" "web_instance" {
     sudo systemctl enable nginx
     sudo snap install --classic certbot
     sudo ln -s /snap/bin/certbot /usr/bin/certbot
-
-    # Clone the GitHub repository
-    git clone ${var.github_repo_url} /home/ubuntu/app
-
-   
-    cd /home/ubuntu/app
-    sudo docker build -t ${var.docker_image_name} . 
-    sudo docker run -d -p ${var.docker_port}:${var.docker_port} --name ${var.docker_container_name} ${var.docker_image_name}
     sudo rm -rf /etc/nginx/sites-available/default
     sudo rm -rf /etc/nginx/sites-enabled/default
     sudo sed -i 's/{instance_ip}/'${aws_eip.web_instance_eip.public_ip}'/g' /home/ubuntu/app/nginx_config.conf
