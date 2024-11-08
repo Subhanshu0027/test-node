@@ -60,28 +60,6 @@ variable "public_key" {
   type        = string
 }
 
-# GitHub Repository URL
-variable "github_repo_url" {
-  description = "GitHub repository URL to clone"
-  type        = string
-}
-# Docker Image Name
-variable "docker_image_name" {
-  description = "The name of the Docker image"
-  type        = string
-}
-
-# Docker Container Name
-variable "docker_container_name" {
-  description = "The name of the Docker container"
-  type        = string
-}
-
-# Docker Port
-variable "docker_port" {
-  description = "The port to expose on the Docker container"
-  type        = string
-}
 # Certbot Configuration
 variable "cert_email" {
   description = "Email for Certbot registration"
