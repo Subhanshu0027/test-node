@@ -20,7 +20,6 @@ key_name         = "test-key"
 public_key       = ""
 
 # GitHub Repository URL
-github_repo_url  = "https://github.com/Subhanshu0027/test-node.git"
 
 docker_image_name      = "my-app"    
 docker_container_name  = "my-app-container"  
